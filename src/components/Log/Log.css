@@ -1,0 +1,15 @@
+.MessageLog {
+  margin: 0;
+  padding: 0;
+}
+.MessageLogItem {
+  background: #eee;
+  list-style: none;
+  font-size: 10px;
+  margin-bottom: 5px;
+  padding: 5px;
+}
+.MessageLogTitle {
+  font-size: 18px;
+  margin-bottom: 15px;
+}

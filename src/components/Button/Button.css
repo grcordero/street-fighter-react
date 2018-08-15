@@ -1,0 +1,23 @@
+.Button {
+  cursor: pointer;
+  outline: none;
+}
+.Button.Red {
+  border: 5px solid red;
+  border-radius: 50%;
+  background: linear-gradient(to bottom right, darkred, red);
+  height: 80px;
+  width: 80px;
+}
+.Button.Green {
+  border: 5px solid green;
+  border-radius: 50%;
+  background: linear-gradient(to bottom right, darkgreen, green);
+  height: 80px;
+  width: 80px;
+}
+.Button.Plain {
+  background: #ccc;
+  padding: 10px 20px;
+  text-align: center;
+}

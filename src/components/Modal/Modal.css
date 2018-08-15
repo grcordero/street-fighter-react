@@ -1,0 +1,28 @@
+.Overlay {
+  background: rgba(190, 0, 0, 0.6);
+  left: 0;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.Modal {
+  background: white;
+  box-shadow: 0 0 10px darkred;
+  left: 50%;
+  max-width: 600px;
+  margin: 0 auto;
+  min-height: 100px;
+  padding: 40px;
+  position: fixed;
+  top: 50%;
+  transform: translate(-50%,-50%);
+}
+
+.ModalClose {
+  font-size: 24px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}

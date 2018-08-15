@@ -1,0 +1,10 @@
+.ProgressBar {
+  background: #eee;
+  border: 1px solid #aaa;
+  height: 15px;
+}
+.ProgressAmount {
+  background: green;
+  height: 100%;
+  transition: .5s ease all;
+}

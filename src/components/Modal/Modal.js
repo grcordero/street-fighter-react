@@ -8,7 +8,7 @@ const modal = props => {
         <span className={classes.ModalClose} onClick={props.closeOverlay}>
           &times;
         </span>
-        <div className="ModalContent">
+        <div className={classes.ModalContent}>
           {props.children}
         </div>
       </div>

@@ -25,6 +25,7 @@ class App extends Component {
   handlePunchButton = () => {
     let damage = this.getRandomDamageAmount(5, 9);
     let opponentHealth = this.state.opponentHealth - damage;
+    opponentHealth = opponentHealth < 0 ? 0 : opponentHealth;
     let messageLog = [...this.state.messageLog];
     messageLog.push(`Player used Special Attack and did ${damage} damage`);
     this.setState({ opponentHealth, messageLog}, () => {
@@ -36,6 +37,7 @@ class App extends Component {
   handleSpecialButton = () => {
     let damage = this.getRandomDamageAmount(8, 12);
     let opponentHealth = this.state.opponentHealth - damage;
+    opponentHealth = opponentHealth < 0 ? 0 : opponentHealth;
     let messageLog = [...this.state.messageLog];
     messageLog.push(`Player used Special Attack and did ${damage} damage`);
     this.setState({ opponentHealth, messageLog }, () => {
@@ -48,6 +50,7 @@ class App extends Component {
     if (this.state.gameInPlay) {
       let damage = this.getRandomDamageAmount(5, 15);
       let playerHealth = this.state.playerHealth - damage;
+      playerHealth = playerHealth < 0 ? 0 : playerHealth;
       let messageLog = [...this.state.messageLog];
       console.log(playerHealth);
       messageLog.push(`Opponent attacks and does ${damage} damage`);
@@ -69,24 +72,13 @@ class App extends Component {
       var gameOverMessage = "";
       if (this.state.opponentHealth <= 0) {
         messageLog.push('Player won!');
-        gameOverMessage = "<p>Player won. Play again?</p>"
+        gameOverMessage = "Player won. Play again?"
       }
       if (this.state.playerHealth <= 0) {
         messageLog.push('Man, you suck!');
-        gameOverMessage = "<p>You lose. Play again?</p>"
+        gameOverMessage = "You lose. Play again?"
       }
       this.setState({gameInPlay, showModal, messageLog, gameOverMessage});
-    }
-  }
-
-  opponentsTurn = () => {
-    if (this.state.gameInPlay) {
-      let damage = this.getRandomDamageAmount(5, 15);
-      let playerHealth = this.playerHealth - damage;
-      let messageLog = [...this.state.messageLog];
-      messageLog.push(`Opponent attacks and does ${damage} damage`);
-      this.setState({playerHealth, messageLog});
-      this.checkForGameOver();
     }
   }
 
@@ -100,12 +92,25 @@ class App extends Component {
     });
   }
 
+  renderModal = () => {
+    return (
+      <Modal>
+        <div>
+          <p>{this.state.gameOverMessage}</p>
+        </div>
+        <CustomButton buttonStyle="Plain" pressed={this.handleResetButton}>
+          Challenge Accepted
+        </CustomButton>
+      </Modal>
+    )
+  }
+
   render() {
     return (
       <div className={classes.App}>
         <h1 className={classes.AppTitle}>Street Fighter</h1>
-        <div className={['fighters', 'row'].join(' ')}>
-          <div className={['player', 'figher', 'column'].join(' ')}>
+        <div className={[classes.fighters, classes.row].join(' ')}>
+          <div className={classes.column}>
             <span>Player 1</span>
             <HealthMeter healthValue={this.state.playerHealth}></HealthMeter>
           </div>
@@ -116,21 +121,14 @@ class App extends Component {
 		    </div >
         <div className={classes.row}>
           <div className={classes.column}>
-            <CustomButton buttonStyle="green" pressed={this.handlePunchButton}></CustomButton>
-            <CustomButton buttonStyle="red" pressed={this.handleSpecialButton}></CustomButton>
+            <CustomButton buttonStyle="Green" pressed={this.handlePunchButton}></CustomButton>
+            <CustomButton buttonStyle="Red" pressed={this.handleSpecialButton}></CustomButton>
           </div>
           <div className={classes.column}>
             <Log messages={this.state.messageLog}></Log>
           </div >
         </div >
-        <Modal visible="showModal">
-          <div>
-            {this.state.gameOverMessage}
-          </div>
-          <CustomButton buttonStyle="plain" pressed={this.handleResetButton}>
-            Challenge Accepted
-          </CustomButton>
-        </Modal>
+        {this.state.showModal ? this.renderModal() : null}
       </div>
     );
   }

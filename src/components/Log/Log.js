@@ -3,17 +3,14 @@ import React from 'react';
 const log = (props) => {
 	return (
 		<div>
-			<h2>
-				The Log
-			</h2>	
+			{props.messages.length ? (<h2>Damage Logs</h2>) : null}
 			<ul>
-				{props.messages.map((message, index) => {
-					return (
-						<li>
+				{props.messages.map((message, index) => (
+						<li key={index}>
 							{message}
 						</li>
 					)
-				})}
+				)}
 			</ul>		
 		</div>
 	)
